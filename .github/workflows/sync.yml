@@ -24,8 +24,8 @@ jobs:
               echo "::group::$name"
               git clone --bare $src $name
               cd $name
-              git push --all -f --prune https://${{ secrets.PAT }}@github.com/$dst.git || true && echo "::warning title=Git push failed::Push $src to $dst"
-              git push --tags -f --prune https://${{ secrets.PAT }}@github.com/$dst.git || true && echo "::warning title=Git push failed::Push $src to $dst"
+              git push --all -f --prune https://${{ secrets.PAT }}@github.com/$dst.git || echo "::warning title=Git push failed::Push $src to $dst"
+              git push --tags -f --prune https://${{ secrets.PAT }}@github.com/$dst.git || echo "::warning title=Git push failed::Push $src to $dst"
               cd .. && rm -rf $name
               echo "::endgroup::"
           done < data/mirror.list
