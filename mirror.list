@@ -1,0 +1,11 @@
+dav1d https://code.videolan.org/videolan/dav1d.git
+fontconfig https://gitlab.freedesktop.org/fontconfig/fontconfig.git
+libbluray https://code.videolan.org/videolan/libbluray.git
+libdvdcss https://code.videolan.org/videolan/libdvdcss.git
+libdvdnav https://code.videolan.org/videolan/libdvdnav.git
+libdvdread https://code.videolan.org/videolan/libdvdread.git
+libudfread https://code.videolan.org/videolan/libudfread.git
+nv-codec-headers https://git.videolan.org/git/ffmpeg/nv-codec-headers.git
+uchardet https://gitlab.freedesktop.org/uchardet/uchardet.git
+x264 https://code.videolan.org/videolan/x264.git
+x265_git https://bitbucket.org/multicoreware/x265_git.git
