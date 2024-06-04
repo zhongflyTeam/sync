@@ -1,0 +1,31 @@
+name: sync
+
+on:
+  schedule:
+    - cron: '30 */8 * * *'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: data
+
+      - name: mirror
+        shell: bash
+        run: |
+          set +e
+          while IFS= read -r line || [[ -n "$line" ]]; do
+              name=$(echo $line | cut -d ' ' -f1)
+              src=$(echo $line | cut -d ' ' -f2)
+              dst=${{ github.repository_owner }}/$name
+              echo "::group::$name"
+              git clone --bare $src $name
+              cd $name
+              git push --all -f --prune https://${{ secrets.PAT }}@github.com/$dst.git || true && echo "::warning title=Git push failed::Push $src to $dst"
+              git push --tags -f --prune https://${{ secrets.PAT }}@github.com/$dst.git || true && echo "::warning title=Git push failed::Push $src to $dst"
+              cd .. && rm -rf $name
+              echo "::endgroup::"
+          done < data/mirror.list
