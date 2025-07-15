@@ -4,7 +4,9 @@ on:
   schedule:
     - cron: '29 * * * *'
   workflow_dispatch:
-
+permissions:
+  actions: write
+  contents: write
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -29,3 +31,4 @@ jobs:
               cd .. && rm -rf $name
               echo "::endgroup::"
           done < data/mirror.list
+      - uses: gautamkrishnar/keepalive-workflow@v2
